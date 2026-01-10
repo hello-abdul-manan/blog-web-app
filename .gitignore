@@ -1,0 +1,49 @@
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# -------------------------
+# Django
+# -------------------------
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# -------------------------
+# Environment variables
+# -------------------------
+.env
+.env.*
+venv/
+env/
+ENV/
+
+# -------------------------
+# IDEs & Editors
+# -------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -------------------------
+# OS Files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Static files (optional)
+# -------------------------
+staticfiles/
+
+# -------------------------
+# Test & coverage
+# -------------------------
+.coverage
+htmlcov/
+pytest_cache/
