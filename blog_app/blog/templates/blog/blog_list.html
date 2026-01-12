@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post List</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Blog List{% endblock  %}
+{% block content %}
     <h1>Blog Posts</h1>
     <a href="{% url 'create_post' %}">Add Post</a>
     {% for post in posts %}
@@ -13,8 +8,8 @@
         <p>{{post.content}}</p>
         <p>Category: {{ post.category }}</p>
         <p>Author: {{post.author}}</p>
+        <a href="{% url 'update_post' post.id %}">Edit</a>
     {% empty %}
         <p>No posts available.</p><a href="{% url 'create_post' %}">Create here</a>
     {% endfor %}
-</body>
-</html>
+{% endblock  %}
