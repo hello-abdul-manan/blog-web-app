@@ -8,8 +8,11 @@
         <p>{{post.content}}</p>
         <p>Category: {{ post.category }}</p>
         <p>Author: {{post.author}}</p>
-        <a href="{% url 'update_post' post.id %}">Edit</a>
+        {% if post.author == request.user %}
+            <a href="{% url 'update_post' post.id %}">Edit</a>
+            <a href="{% url 'delete_post' post.id %}">Delete</a>
+        {% endif %}
     {% empty %}
-        <p>No posts available.</p><a href="{% url 'create_post' %}">Create here</a>
+        <p>No posts available.</p>
     {% endfor %}
 {% endblock  %}
