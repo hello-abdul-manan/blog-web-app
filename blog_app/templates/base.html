@@ -12,7 +12,15 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'post_list' %}">List</a></li>
+                {% if user.is_authenticated %}
+                    <span>Hi, {{ user.username }}</span>
+                    <li><a href="{% url 'post_list' %}">Blog List</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+                
             </ul>
         </nav>
     </header>
