@@ -1,10 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponseForbidden
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, SignupForm, LoginForm
 
 # Create your views here.
 def home(request):
@@ -14,6 +13,10 @@ def home(request):
 def post_list(request):
     posts = Post.objects.all().order_by('-created_at')
     return render(request, 'blog/blog_list.html', {'posts': posts})
+
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, 'blog/post_detail.html', {'post': post})
 
 @login_required
 def create_post(request):
@@ -56,24 +59,24 @@ def delete_post(request, post_id):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('post_list')
     else:
-        form = UserCreationForm()
+        form = SignupForm()
     return render(request, 'auth/signup.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
+        form = LoginForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('post_list')
     else:
-        form = AuthenticationForm()
+        form = LoginForm()
     return render(request, 'auth/login.html', {'form': form})
 
 def logout_view(request):
