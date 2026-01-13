@@ -1,13 +1,53 @@
 {% extends "base.html" %}
-{% block title %}Login{% endblock  %}
+{% block title %}Login{% endblock %}
+
 {% block content %}
-    <h1>Login</h1>
-    <form method='post'>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type='submit'>Login</button>
-    </form>
-    <p>Don’t have an account?
-        <a href="{% url 'signup' %}">Sign Up</a>
-    </p>
-{% endblock  %}
+
+<div class="min-h-[70vh] flex items-center justify-center">
+
+    <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
+
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                Welcome Back
+            </h1>
+            <p class="text-gray-600 text-sm">
+                Login to continue to Bloggy.
+            </p>
+        </div>
+
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                    Username
+                </label>
+                {{ form.username }}
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                    Password
+                </label>
+                {{ form.password }}
+            </div>
+
+            <button type="submit"
+                    class="w-full py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-medium">
+                Login
+            </button>
+        </form>
+
+        <p class="text-center text-sm text-gray-600 mt-6">
+            Don’t have an account?
+            <a href="{% url 'signup' %}" class="text-indigo-600 font-medium hover:underline">
+                Sign Up
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
