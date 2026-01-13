@@ -1,11 +1,44 @@
 {% extends "base.html" %}
-{% block title %}Delete Post{% endblock  %}
+{% block title %}Delete Post{% endblock %}
+
 {% block content %}
-    <h1>Delete Post</h1>
-    <p>Are you sure?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-        <a href="{% url 'post_list' %}">Cancel</a>
-    </form>
-{% endblock  %}
+
+<div class="max-w-xl mx-auto">
+
+    <div class="bg-white shadow-lg rounded-xl p-8 text-center">
+
+        <div class="flex justify-center mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-red-100 text-red-600">
+                ⚠
+            </div>
+        </div>
+
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">
+            Delete Post
+        </h1>
+
+        <p class="text-gray-600 mb-6">
+            Are you sure you want to delete this post?  
+            <span class="block mt-2 text-sm text-red-500">
+                This action cannot be undone.
+            </span>
+        </p>
+
+        <form method="post" class="flex justify-center space-x-4">
+            {% csrf_token %}
+
+            <a href="{% url 'post_list' %}"
+               class="px-5 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                Cancel
+            </a>
+
+            <button type="submit"
+                    class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                Yes, Delete
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
