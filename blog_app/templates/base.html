@@ -4,31 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Bloggy {% endblock %}</title>
+    <title>{% block title %}Bloggy{% endblock %}</title>
+
+    {% load static %}
+    <link href="{% static 'src/output.css' %}" rel="stylesheet">
 </head>
 
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+            <a href="{% url 'home' %}" class="text-2xl font-bold text-indigo-600">
+                Bloggy
+            </a>
+
+            <ul class="flex items-center space-x-6">
+                <li>
+                    <a href="{% url 'home' %}" class="hover:text-indigo-600 transition">
+                        Home
+                    </a>
+                </li>
+
                 {% if user.is_authenticated %}
-                    <span>Hi, {{ user.username }}</span>
-                    <li><a href="{% url 'post_list' %}">Blog List</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+
+                <li>
+                    <a href="{% url 'post_list' %}" class="hover:text-indigo-600 transition">
+                        Blogs
+                    </a>
+                </li>
+
+                <li class="text-sm text-gray-600">
+                    Hi, <span class="font-medium">{{ user.username }}</span>
+                </li>
+
+                <li>
+                    <a href="{% url 'logout' %}"
+                        class="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 transition">
+                        Logout
+                    </a>
+                </li>
                 {% else %}
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                <li>
+                    <a href="{% url 'login' %}" class="hover:text-indigo-600 transition">
+                        Login
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'signup' %}"
+                        class="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                        Sign Up
+                    </a>
+                </li>
                 {% endif %}
-                
             </ul>
         </nav>
     </header>
-    <main>
+
+    <main class="max-w-7xl mx-auto px-6 py-16">
         {% block content %}
-        <h1> Welcome to Bloggy</h1>
+
+        <section class="text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6">
+                Welcome to <span class="text-indigo-600">Bloggy</span>
+            </h1>
+
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Bloggy is a simple and clean blogging platform.
+                Share your thoughts, document your learning journey, and explore
+                posts written by others.
+            </p>
+
+            <div class="flex justify-center space-x-4">
+                {% if user.is_authenticated %}
+                <a href="{% url 'post_list' %}"
+                    class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    Explore Blogs
+                </a>
+                {% else %}
+                <a href="{% url 'signup' %}"
+                    class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    Get Started
+                </a>
+                {% endif %}
+            </div>
+        </section>
+
         {% endblock %}
     </main>
+
 </body>
 
 </html>
