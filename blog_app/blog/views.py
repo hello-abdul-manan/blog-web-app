@@ -56,7 +56,7 @@ def delete_post(request, post_id):
         post.delete()
         return redirect('post_list')
     return render(request, 'blog/delete_post.html', {'post': post})
-
+ 
 def signup_view(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
